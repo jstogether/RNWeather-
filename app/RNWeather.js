@@ -9,11 +9,11 @@ var {
   TextInput
 } = React;
 
-class Main extends React.Component {
+class RNWeather extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      city: this.props.city,
+      city: 'NYC',
       isLoading: false,
       error: false
     }
@@ -96,4 +96,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = Main;
+module.exports = RNWeather;
