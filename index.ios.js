@@ -3,31 +3,28 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-import React, {
+
+
+var {
   AppRegistry,
   Component,
   StyleSheet,
+  NavigatorIOS,
   Text,
   View
-} from 'react-native';
+} = React;
 
 class RNWeather extends Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
+     return (
+       <NavigatorIOS
+       style={styles.container}
+         initialRoute={{
+           title: 'RNWeather',
+           component: Main
+         }} />
+     );
+   }
 }
 
 const styles = StyleSheet.create({
