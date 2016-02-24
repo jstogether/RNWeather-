@@ -3,26 +3,25 @@
  * https://github.com/facebook/react-native
  */
 'use strict';
-
+var React = require('react-native');
+var Main = require('./app/Main');
 
 var {
   AppRegistry,
   Component,
-  StyleSheet,
-  NavigatorIOS,
+  View,
   Text,
-  View
+  Navigator,
+  StyleSheet
 } = React;
 
 class RNWeather extends Component {
   render() {
      return (
-       <NavigatorIOS
-       style={styles.container}
-         initialRoute={{
-           title: 'RNWeather',
-           component: Main
-         }} />
+       <View style={styles.container}>
+        <Main
+          city = "NYC"/>
+       </View>
      );
    }
 }
@@ -30,19 +29,7 @@ class RNWeather extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    backgroundColor: '#F5FCFF'
   },
 });
 
