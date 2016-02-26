@@ -1,5 +1,6 @@
+/** @Flow */
+
 var React = require('react-native');
-//var WeatherAPI = require('./services/WeatherAPI.js');
 
 var {
   Text,
@@ -13,14 +14,31 @@ class RNWeather extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      city: 'NYC',
-      isLoading: false,
+      city: '',
+      weather: null,
+      loaded: false,
       error: false
     }
   }
   submitCity(){
-    //Submit city stub
-    console.log("Submitting ", this.state.city );
+    if (this.state.city) {
+      this.setState({isLoading: true})
+
+      var appid = '8278ca33b570e8ac2502f311db32c9a5'
+      var city = this.state.city.trim();
+      var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`;
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((responseData) => {
+          this.setState({
+            isLoading: false,
+            weather: JSON.stringify(responseData),
+          });
+        })
+        .catch((error) => this.setState({isLoading: false, error: true}))
+        .done()
+    }
   }
   handleCityInput(event){
     this.setState({
@@ -28,11 +46,12 @@ class RNWeather extends React.Component {
     })
   }
   render() {
-     return (
+    return (
        <View style={styles.container}>
         <Text style={styles.headerText}>Enter your city!</Text>
         <TextInput
         style={styles.searchInput}
+        placeholder="City"
         value={this.state.city}
         onChange={this.handleCityInput.bind(this)}
         />
@@ -42,8 +61,9 @@ class RNWeather extends React.Component {
           style={styles.button}>
           <Text style={styles.buttonText}> Search </Text>
         </TouchableHighlight>
+        <Text>{this.state.weather}</Text>
       </View>
-     )
+    )
   }
 }
 
