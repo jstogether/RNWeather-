@@ -10,3 +10,5 @@ A simple weather app build in [React Native](https://facebook.github.io/react-na
 * Run on iOS simulator executing `react-native run-ios`
 * Run on Android Emulator executing `react-native run-android`
 See [Getting Started](https://facebook.github.io/react-native/docs/getting-started.html) and [Debugging](https://facebook.github.io/react-native/docs/debugging.html) for more details.
+
+* Run unit tests `npm test`
