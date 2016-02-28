@@ -1,6 +1,7 @@
 /** @Flow */
 
 var React = require('react-native');
+var WeatherAPI = require('./services/weather-api');
 
 var {
   Text,
@@ -23,13 +24,8 @@ class RNWeather extends React.Component {
   submitCity(){
     if (this.state.city) {
       this.setState({isLoading: true})
-
-      var appid = '8278ca33b570e8ac2502f311db32c9a5'
       var city = this.state.city.trim();
-      var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}`;
-
-      fetch(url)
-        .then((response) => response.json())
+      WeatherAPI.getWeatherByCity(city)
         .then((responseData) => {
           this.setState({
             isLoading: false,
