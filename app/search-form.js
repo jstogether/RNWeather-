@@ -1,45 +1,29 @@
 /** @Flow */
 
 var React = require('react-native');
-var WeatherAPI = require('./services/weather-api');
 
 var {
   Text,
   TouchableHighlight,
   StyleSheet,
   View,
-  TextInput
+  TextInput,
 } = React;
 
-class RNWeather extends React.Component {
+class SearchForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       city: '',
-      weather: null,
-      loaded: false,
-      error: false
-    }
-  }
-  submitCity(){
-    if (this.state.city) {
-      this.setState({isLoading: true})
-      var city = this.state.city.trim();
-      WeatherAPI.getWeatherByCity(city)
-        .then((responseData) => {
-          this.setState({
-            isLoading: false,
-            weather: JSON.stringify(responseData),
-          });
-        })
-        .catch((error) => this.setState({isLoading: false, error: true}))
-        .done()
     }
   }
   handleCityInput(event){
     this.setState({
       city: event.nativeEvent.text
     })
+  }
+  handleSearch(event){
+    this.props.onSearch(this.state.city)
   }
   render() {
     return (
@@ -52,12 +36,11 @@ class RNWeather extends React.Component {
         onChange={this.handleCityInput.bind(this)}
         />
         <TouchableHighlight
-          onPress={this.submitCity.bind(this)}
+          onPress={this.handleSearch.bind(this)}
           underlayColor = "#A4E786"
           style={styles.button}>
           <Text style={styles.buttonText}> Search </Text>
         </TouchableHighlight>
-        <Text>{this.state.weather}</Text>
       </View>
     )
   }
@@ -112,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = RNWeather;
+module.exports = SearchForm;
