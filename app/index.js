@@ -24,10 +24,20 @@ class RNWeather extends React.Component {
       city: '',
       weather: null,
       isLoading: false,
-      error: false
+      error: false,
     }
   }
-  submitCity(city) {
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        let {latitude, longitude} = position.coords;
+        this._submitCoordinates(latitude, longitude);
+      },
+      (error) => console.log(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+    );
+  }
+  _submitCity(city) {
     if (city) {
       this.setState( {isLoading: true} )
       WeatherAPI.getWeatherByCity(city.trim())
@@ -41,31 +51,45 @@ class RNWeather extends React.Component {
         .done()
     }
   }
-  renderLoading() {
+  _submitCoordinates(lat, lon) {
+    if (lat && lon) {
+      this.setState( {isLoading: true} )
+      WeatherAPI.getWeatherByCoordinates(lat, lon)
+        .then((responseData) => {
+          this.setState({
+            isLoading: false,
+            weather: responseData,
+          });
+        })
+        .catch((error) => this.setState({isLoading: false, error: true}))
+        .done()
+    }
+  }
+  _renderLoading() {
     return (
       <View style={styles.container}>
         <Text>Loading...</Text>
       </View>
     )
   }
-  renderWeather() {
+  _renderWeather() {
     return (
       <WeatherConditions data={this.state.weather} />
     )
   }
-  renderSearch() {
+  _renderSearch() {
     return (
-      <SearchForm onSearch={this.submitCity.bind(this)} />
+      <SearchForm onSearch={this._submitCity.bind(this)} />
     )
   }
   render() {
     if (this.state.isLoading)
-      return this.renderLoading();
+      return this._renderLoading();
 
     if (this.state.weather)
-      return this.renderWeather();
+      return this._renderWeather();
 
-    return this.renderSearch();
+    return this._renderSearch();
   }
 }
 
