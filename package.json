@@ -7,9 +7,9 @@
     "flow": "node_modules/flow-bin/cli.js check"
   },
   "dependencies": {
-    "react-native": "^0.20.0",
+    "react-native": "^0.21.0",
     "react-native-i18n": "0.0.8",
-    "react-native": "^0.20.0"
+    "react-native-speech": "^0.1.2"
   },
   "devDependencies": {
     "flow-bin": "^0.21.0"
