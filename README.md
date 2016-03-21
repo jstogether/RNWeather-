@@ -13,5 +13,7 @@ A simple weather app for iOS and Android build in [React Native](https://faceboo
 ## Other tasks
 
 * Install libraries `npm install LIBRARY --save`
+* Install native extensions `rnpm install EXTENSION`
 * Link native libraries `rnpm link`
+* Check npm updates `npm install -g npm-check-updates && ncu`
 * Run static type checker `npm run check`

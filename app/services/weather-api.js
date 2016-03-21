@@ -1,3 +1,5 @@
+'use strict';
+
 var I18n = require('react-native-i18n'); // FIXME: This file should not contain any trace of RN code
 
 var WeatherApi = {

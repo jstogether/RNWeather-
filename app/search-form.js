@@ -2,6 +2,9 @@
 
 var React = require('react-native');
 
+var I18n = require('react-native-i18n');
+I18n.fallbacks = true;
+
 var {
   Text,
   TouchableHighlight,
@@ -31,7 +34,7 @@ class SearchForm extends React.Component {
         <Text style={styles.headerText}>Enter your city!</Text>
         <TextInput
         style={styles.searchInput}
-        placeholder="City"
+        placeholder={I18n.t('city')}
         value={this.state.city}
         onChange={this.handleCityInput.bind(this)}
         />
@@ -43,6 +46,15 @@ class SearchForm extends React.Component {
         </TouchableHighlight>
       </View>
     )
+  }
+}
+
+I18n.translations = {
+  en: {
+    city: 'City'
+  },
+  es: {
+    city: 'Ciudad'
   }
 }
 

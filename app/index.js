@@ -4,7 +4,6 @@
 
 var React = require('react-native');
 
-var I18n = require('react-native-i18n');
 var WeatherAPI = require('./services/weather-api');
 
 var SearchForm = require('./search-form');

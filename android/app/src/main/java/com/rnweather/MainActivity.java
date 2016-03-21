@@ -8,6 +8,8 @@ import com.facebook.react.shell.MainReactPackage;
 import java.util.Arrays;
 import java.util.List;
 
+import com.mihir.react.tts.*;
+
 public class MainActivity extends ReactActivity {
 
     /**
@@ -28,15 +30,16 @@ public class MainActivity extends ReactActivity {
         return BuildConfig.DEBUG;
     }
 
-   /**
-   * A list of packages used by the app. If the app uses additional views
-   * or modules besides the default ones, add more packages here.
-   */
+    /**
+     * A list of packages used by the app. If the app uses additional views
+     * or modules besides the default ones, add more packages here.
+     */
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-        new MainReactPackage(),
-        new ReactNativeI18n()
-      );
+        return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new ReactNativeI18n(),
+            new RCTTextToSpeechModule()
+        );
     }
 }

@@ -3,6 +3,7 @@
 'use strict';
 
 var React = require('react-native');
+var Speech = require('./services/speech');
 
 var {
   View,
@@ -16,6 +17,14 @@ var {
 class WeatherConditions extends React.Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    if (this.props.data) {
+      var message = this.props.data.name + ", " + this.props.data.weather[0].description
+      Speech.say(message)
+    } else {
+      Speech.say('No Data')
+    }
   }
   render() {
     if (this.props.data)
